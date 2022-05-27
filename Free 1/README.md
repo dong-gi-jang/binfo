@@ -6,7 +6,7 @@ CLIP 및 ribosome profiling에서 enrich되는 GO term 확인.
 subread의 featurecounts 이용, 우선은 ignore all 방식으로 multimapping 처리한 gene level에서 GO analysis 진행 예정. 차후 transcript level에 적절한 multimapping 처리 방식 및 간단히 결과 확인해본 후 transcript에서 보아도 될지 여부 판단.
 
 Normalize 
- - 각 실험에서의 total sum 이용한 normalze.
+ - 각 실험에서의 total sum 이용한 normalize.
  - 우선은 featurecounts 결과에서의 column sum을 기반으로 normalize
  - transcript에서 진행해보려면 per read length 적용 필요??
 
