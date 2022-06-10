@@ -17,7 +17,7 @@ featureCounts
 GSEApy Biomart
 
 ## Read assignment
-featureCounts
+Use featureCounts
 
 Gene-level counting
 
@@ -34,11 +34,11 @@ cnts['log2_rden_change'] = np.log2(
     )
 ```
 Total sum scaling
-    -Using total # of successfully assigned alignments
+        - Using total # of successfully assigned alignments
 
 Filter out low read counts
-    - <30 raw reads in RNA-seq
-    - <80 raw reads in RPF
+        - <30 raw reads in RNA-seq
+        - <80 raw reads in RPF
 
 ## Statistical test
  - log2 fc of ribosome density에 대한 test
