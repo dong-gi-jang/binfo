@@ -1,6 +1,6 @@
 # Free 1
 
-## Fig 5A 재현
+## Fig 5A 재현 프로젝트
 CLIP 및 ribosome density profiling에서 enrich되는 GO term 확인하기.
 
 
