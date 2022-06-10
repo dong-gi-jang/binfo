@@ -2,19 +2,39 @@
 ## Fig 5A 재현
 CLIP 및 ribosome density profiling에서 enrich되는 GO term 확인하기.
 
-# 
-subread의 featurecounts 이용, 우선은 ignore all 방식으로 multimapping 처리한 gene level에서 GO analysis 진행 예정. 차후 transcript level에 적절한 multimapping 처리 방식 및 간단히 결과 확인해본 후 transcript에서 보아도 될지 여부 판단.
+## Datasets
+Gencode annotation (GRCm39)
+35L33G CLIP library   &   ctrl RNA-seq library
+siLin28a library   &   siLuc library
+RPF-siLin28a library   &   RPF-siLuc library 
 
-Normalize 
- - 각 실험에서의 total sum 이용한 normalize.
- - 우선은 featurecounts 결과에서의 column sum을 기반으로 normalize
- - transcript에서 진행해보려면 per read length 적용 필요??
+## Tools
+featureCounts
+GSEApy Biomart
 
-Cutoff
- - 작은 값들끼리의 ratio 튀는 것 방지 위함, zero value 처리 위함.
- - 논문 참조, read 개수 30, 80 적용?
+## Read assignment
+featureCounts
+Gene-level counting
+Ignoring multi-mapped reads
 
-Statistical test
+## Data processing 
+```
+cnts['log2_clip_enrichment'] = np.log2(   ( cnts['CLIP-35L33G.bam']/cnts['CLIP-35L33G.bam'].sum() )   /   ( cnts['RNA-control.bam']/cnts['RNA-control.bam'].sum() )   )
+cnts['log2_rden_change'] = np.log2(  
+    (   ( cnts['RPF-siLin28a.bam']/cnts['RPF-siLin28a.bam'].sum() ) / ( cnts['RNA-siLin28a.bam']/cnts['RNA-siLin28a.bam'].sum() )   )
+    /
+    (   ( cnts['RPF-siLuc.bam']/cnts['RPF-siLuc.bam'].sum() ) / ( cnts['RNA-siLuc.bam']/cnts['RNA-siLuc.bam'].sum() )   )   
+    )
+```
+Total sum scaling
+Using total # of successfully assigned alignments
+Filter out low read counts
+<30 raw reads in RNA-seq
+<80 raw reads in RPF
+ript에서 진행해보려면 per read length 적용 필요??
+
+
+## Statistical test
  - log2 fc of ribosome density에 대한 test
  - ttest 대신 Wilcoxon ranksum 진행
 
