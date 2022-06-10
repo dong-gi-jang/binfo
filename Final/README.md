@@ -1,6 +1,8 @@
 # Free 1
+
 ## Fig 5A 재현
 CLIP 및 ribosome density profiling에서 enrich되는 GO term 확인하기.
+
 
 ## Datasets
 Gencode annotation (GRCm39)
@@ -11,10 +13,12 @@ siLin28a library   &   siLuc library
 
 RPF-siLin28a library   &   RPF-siLuc library 
 
+
 ## Tools
 featureCounts
 
 GSEApy Biomart
+
 
 ## Read assignment
 Use featureCounts
@@ -22,6 +26,7 @@ Use featureCounts
 Gene-level counting
 
 Ignoring multi-mapped reads
+
 
 ## Data processing 
 Calcuate Clip-enrichment level & Ribosome-density change
@@ -34,22 +39,40 @@ cnts['log2_rden_change'] = np.log2(
     )
 ```
 Total sum scaling
+
         - Using total # of successfully assigned alignments
 
 Filter out low read counts
+
         - <30 raw reads in RNA-seq
+        
         - <80 raw reads in RPF
 
+
+## GO term mapping
+GSEApy Biomart
+
+map GO term accession & GO term name to Ensembl Gene IDs
+
+
 ## Statistical test
- - log2 fc of ribosome density에 대한 test
- - ttest 대신 Wilcoxon ranksum 진행
+Mann-Whitney U test
 
-Identifier mapping
- - gseapy 이용, biomart에서 gene symbol 가져오기
+    - for each GO term membership   vs   remaining genes
 
-GO analysis
- - gseapy 이용, enrichr에서 GO:CC,BP,MF 2021에 대한 분석
+    - p-values were adjusted to FDRs by Benjamini-Hochberg method
 
-Visualize
- - pyplot scatter로 진행
+Representative CLIP-enrich levels & Rden fold changes are defined as arithmetic differences 
+between mean log2 levels/changes of GO term membership and others
+
+(Refered to Table S6)
+
+
+
+## Visualize
+show only FDR < 0.05 for GO term
+
+subset terms were omitted manually  
+
+visualization is done using python matplotlib only
 
