@@ -4,20 +4,27 @@ CLIP 및 ribosome density profiling에서 enrich되는 GO term 확인하기.
 
 ## Datasets
 Gencode annotation (GRCm39)
+
 35L33G CLIP library   &   ctrl RNA-seq library
+
 siLin28a library   &   siLuc library
+
 RPF-siLin28a library   &   RPF-siLuc library 
 
 ## Tools
 featureCounts
+
 GSEApy Biomart
 
 ## Read assignment
 featureCounts
+
 Gene-level counting
+
 Ignoring multi-mapped reads
 
 ## Data processing 
+Calcuate Clip-enrichment level & Ribosome-density change
 ```
 cnts['log2_clip_enrichment'] = np.log2(   ( cnts['CLIP-35L33G.bam']/cnts['CLIP-35L33G.bam'].sum() )   /   ( cnts['RNA-control.bam']/cnts['RNA-control.bam'].sum() )   )
 cnts['log2_rden_change'] = np.log2(  
@@ -27,12 +34,11 @@ cnts['log2_rden_change'] = np.log2(
     )
 ```
 Total sum scaling
-Using total # of successfully assigned alignments
-Filter out low read counts
-<30 raw reads in RNA-seq
-<80 raw reads in RPF
-ript에서 진행해보려면 per read length 적용 필요??
+    -Using total # of successfully assigned alignments
 
+Filter out low read counts
+    - <30 raw reads in RNA-seq
+    - <80 raw reads in RPF
 
 ## Statistical test
  - log2 fc of ribosome density에 대한 test
